@@ -1,0 +1,26 @@
+.flying-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 5rem;
+    animation: fly 5s infinite alternate ease-in-out;
+}
+
+@keyframes fly {
+    0% {
+        transform: translate(100%, 100%) rotate(0deg);
+    }
+    25% {
+        transform: translate(-100%, -100%) rotate(15deg);
+    }
+    50% {
+        transform: translate(-90%, -50%) rotate(-15deg);
+    }
+    75% {
+        transform: translate(100%, -70%) rotate(10deg);
+    }
+    100% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+}

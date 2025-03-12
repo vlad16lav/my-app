@@ -1,0 +1,120 @@
+/* Mainpage.css */
+
+/* Center the todo-container */
+.todo-container {
+    max-width: 500px;          /* Set a max-width to make it not too wide */
+    width: 100%;               /* Make it responsive */
+    margin: 50px auto;         /* Center it horizontally with auto margins */
+    padding: 20px;             /* Reduced padding for better responsiveness */
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading style */
+h1 {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+/* Add todo section */
+.add-todo {
+    display: flex;
+    flex-wrap: wrap;            /* Allow items to wrap on small screens */
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.add-todo input {
+    width: 100%;               /* Take full width on small screens */
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;    /* Ensure padding doesn't affect width */
+    margin-bottom: 10px;       /* Space between input and button */
+}
+
+.add-todo button {
+    width: 100%;               /* Take full width on small screens */
+    padding: 10px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.add-todo button:hover {
+    background-color: #45a049;
+}
+
+/* Todo list style */
+.todo-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.todo-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.todo-item.completed .todo-text {
+    text-decoration: line-through;
+    color: #aaa;
+}
+
+.todo-text {
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/* Delete button */
+.delete-btn {
+    background-color: #ff4d4d;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 14px;
+}
+
+.delete-btn:hover {
+    background-color: #e60000;
+}
+
+/* Error message */
+.error-message {
+    color: red;
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+/* Media query for larger screens */
+@media (min-width: 600px) {
+    .add-todo input {
+        width: 70%;           /* 70% width for input on larger screens */
+        margin-bottom: 0;     /* Remove bottom margin */
+    }
+
+    .add-todo button {
+        width: 28%;           /* 28% width for button on larger screens */
+    }
+}
+
+@media (min-width: 768px) {
+    /* Increase padding and max-width on larger screens */
+    .todo-container {
+        padding: 40px;
+        max-width: 600px;
+    }
+}
