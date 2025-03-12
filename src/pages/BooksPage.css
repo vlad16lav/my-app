@@ -1,0 +1,101 @@
+/* Контейнер для всієї сторінки книг */
+.books-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    min-height: 100vh;  /* Висота на весь екран */
+    background-color: #f5f5f5;  /* Легкий фон */
+}
+
+/* Заголовок */
+.books-container h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+/* Контейнер для карток книг */
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));  /* Гнучка сітка з автоматичним заповненням */
+    gap: 20px;  /* Відстань між картками */
+    width: 100%;  /* Ширина на весь екран */
+    max-width: 1200px; /* Максимальна ширина контейнера */
+    padding: 0 20px;
+    justify-items: center; /* Вирівнювання карток по центру */
+}
+
+/* Стиль для кожної картки */
+.book-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    height: 350px;  /* Висота картки */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 300px; /* Максимальна ширина картки */
+}
+
+/* Ефект при наведенні на картку */
+.book-card:hover {
+    transform: scale(1.05);
+}
+
+/* Стиль для заголовка книги */
+.book-card strong {
+    font-size: 1.5rem;
+    color: #333;
+    display: block;
+    margin-bottom: 15px;
+}
+
+/* Інші деталі книги */
+.book-card p {
+    font-size: 1rem;
+    color: #555;
+    margin: 5px 0;
+}
+
+/* Медіа-запити для адаптації кількості колонок */
+@media (max-width: 1600px) {
+    .books-grid {
+        grid-template-columns: repeat(6, 1fr);  /* 6 карток в рядку для екрану до 1600px */
+    }
+}
+
+@media (max-width: 1200px) {
+    .books-grid {
+        grid-template-columns: repeat(4, 1fr);  /* 4 картки в рядку для середніх екранів */
+    }
+}
+
+@media (max-width: 992px) {
+    .books-grid {
+        grid-template-columns: repeat(3, 1fr);  /* 3 картки в рядку для середніх екранів */
+    }
+}
+
+@media (max-width: 768px) {
+    .books-grid {
+        grid-template-columns: repeat(2, 1fr);  /* 2 картки в рядку для мобільних */
+    }
+}
+
+@media (max-width: 480px) {
+    .books-grid {
+        grid-template-columns: 1fr;  /* 1 картка в рядку для маленьких екранів */
+    }
+}
+
+/* Медіа-запит для дуже великих екранів, більше ніж 1600px */
+@media (min-width: 1600px) {
+    .books-grid {
+        grid-template-columns: repeat(8, 1fr);  /* 8 карток в рядку для дуже великих екранів */
+    }
+}

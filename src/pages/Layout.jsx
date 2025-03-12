@@ -49,6 +49,14 @@ const Layout = () => {
                     >
                         PropTypes
                     </Button>
+                    <Button
+                        color="inherit"
+                        component={Link}
+                        to="/books"
+                        sx={{ transition: 'transform 0.2s ease-in-out', '&:hover': { transform: 'scale(1.2)' } }}
+                    >
+                        Books
+                    </Button>
                 </Toolbar>
             </AppBar>
             <Container sx={{ mt: 8 }}>
