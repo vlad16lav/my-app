@@ -65,7 +65,7 @@
 /* Медіа-запити для адаптації кількості колонок */
 @media (max-width: 1600px) {
     .books-grid {
-        grid-template-columns: repeat(6, 1fr);  /* 6 карток в рядку для екрану до 1600px */
+        grid-template-columns: repeat(5, 1fr);  /* 6 карток в рядку для екрану до 1600px */
     }
 }
 
@@ -96,6 +96,6 @@
 /* Медіа-запит для дуже великих екранів, більше ніж 1600px */
 @media (min-width: 1600px) {
     .books-grid {
-        grid-template-columns: repeat(8, 1fr);  /* 8 карток в рядку для дуже великих екранів */
+        grid-template-columns: repeat(6, 1fr);  /* 8 карток в рядку для дуже великих екранів */
     }
 }
