@@ -1,5 +1,7 @@
-import { Outlet, Link } from "react-router-dom";
-import { AppBar, Toolbar, Typography, Button, Container } from "@mui/material";
+// src/pages/Layout.js
+import React from 'react';
+import { AppBar, Toolbar, Typography, Button, Container } from '@mui/material';
+import { Link, Outlet } from 'react-router-dom';
 
 const Layout = () => {
     return (
@@ -11,7 +13,7 @@ const Layout = () => {
                         sx={{
                             flexGrow: 1,
                             transition: 'font-size 0.2s ease-in-out',
-                            '&:hover': { fontSize: '1.5rem' }
+                            '&:hover': { fontSize: '1.5rem' },
                         }}
                     >
                         Vladislav site
@@ -40,15 +42,6 @@ const Layout = () => {
                     >
                         Profile
                     </Button>
-                    {/* Додаємо посилання на нову сторінку */}
-                    <Button
-                        color="inherit"
-                        component={Link}
-                        to="/prop-types"
-                        sx={{ transition: 'transform 0.2s ease-in-out', '&:hover': { transform: 'scale(1.2)' } }}
-                    >
-                        PropTypes
-                    </Button>
                 </Toolbar>
             </AppBar>
             <Container sx={{ mt: 8 }}>
@@ -59,3 +52,4 @@ const Layout = () => {
 };
 
 export default Layout;
+

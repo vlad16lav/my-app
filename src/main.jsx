@@ -1,12 +1,12 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./pages/Layout";
-import NoPage from "./pages/NoPage";
+import Layout from "./pages/Layout.jsx";
+import NoPage from "./pages/NoPage.jsx";
 import Mainpage from './pages/Mainpage.jsx';
 import Home from './pages/Home.jsx';
 import Profile from './pages/Profile.jsx';
-import TypeScriptPage from './pages/TypeScriptPage.jsx'; // Імпортуємо нову сторінку
+import PropTypes from './pages/PropTypes.jsx'; // Імпортуємо нову сторінку
 
 import './index.css';
 
@@ -18,7 +18,7 @@ createRoot(document.getElementById('root')).render(
                     <Route index element={<Mainpage />} />
                     <Route path="/home" element={<Home />} />
                     <Route path="/profile" element={<Profile />} />
-                    <Route path="/typescript" element={<TypeScriptPage />} /> {/* Додаємо маршрут */}
+                    <Route path="/prop-types" element={<PropTypes title="PropTypes" description="This page demonstrates PropTypes usage in React." />} /> {/* Новий маршрут */}
                     <Route path="*" element={<NoPage />} />
                 </Route>
             </Routes>
