@@ -1,45 +1,54 @@
 import React, { useState, useEffect } from 'react';
+import { db } from '../firebase'; // Імпорт Firestore
+import { collection, addDoc, getDocs, updateDoc, deleteDoc, doc } from 'firebase/firestore';
 import './Mainpage.css';
 
 function Mainpage() {
     const [todos, setTodos] = useState([]);
     const [newTodo, setNewTodo] = useState("");
     const [error, setError] = useState("");
-    const [filter, setFilter] = useState(null);
 
     useEffect(() => {
-        // Динамічний імпорт бібліотеки
-        import('bad-words').then((module) => {
-            // Використовуємо екземпляр класу через імпорт
-            const badWordsFilter = new module.Filter(); // Тут ми створюємо екземпляр
-            setFilter(badWordsFilter);  // Ініціалізуємо стан фільтра
-        });
+        const fetchTodos = async () => {
+            const querySnapshot = await getDocs(collection(db, "todos"));
+            const todoList = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            setTodos(todoList);
+        };
+        fetchTodos();
     }, []);
 
-    const addTodo = (text) => {
+    const addTodo = async (text) => {
         if (text.trim() === "") return;
 
-        if (filter && filter.isProfane(text)) {
-            setError("This task contains inappropriate words. Please try again.");
-            return;
+        try {
+            const docRef = await addDoc(collection(db, "todos"), {
+                text,
+                completed: false
+            });
+            setTodos([...todos, { id: docRef.id, text, completed: false }]);
+            setNewTodo("");
+        } catch (error) {
+            setError("Error adding task. Try again.");
         }
-
-        const newTodo = { id: Date.now(), text, completed: false };
-        setTodos([...todos, newTodo]);
-        setNewTodo("");
-        setError("");
     };
 
-    const toggleTodo = (id) => {
-        setTodos(
-            todos.map((todo) =>
-                todo.id === id ? { ...todo, completed: !todo.completed } : todo
-            )
-        );
+    const toggleTodo = async (id, completed) => {
+        try {
+            const todoRef = doc(db, "todos", id);
+            await updateDoc(todoRef, { completed: !completed });
+            setTodos(todos.map(todo => todo.id === id ? { ...todo, completed: !completed } : todo));
+        } catch (error) {
+            setError("Error updating task status.");
+        }
     };
 
-    const deleteTodo = (id) => {
-        setTodos(todos.filter((todo) => todo.id !== id));
+    const deleteTodo = async (id) => {
+        try {
+            await deleteDoc(doc(db, "todos", id));
+            setTodos(todos.filter(todo => todo.id !== id));
+        } catch (error) {
+            setError("Error deleting task.");
+        }
     };
 
     return (
@@ -54,13 +63,11 @@ function Mainpage() {
                 />
                 <button onClick={() => addTodo(newTodo)}>Add Todo</button>
             </div>
-
-            {error && <div className="error-message">{error}</div>} {/* Повідомлення про помилку */}
-
+            {error && <div className="error-message">{error}</div>}
             <ul className="todo-list">
                 {todos.map((todo) => (
                     <li key={todo.id} className={`todo-item ${todo.completed ? "completed" : ""}`}>
-                        <span onClick={() => toggleTodo(todo.id)} className="todo-text">
+                        <span onClick={() => toggleTodo(todo.id, todo.completed)} className="todo-text">
                             {todo.text}
                         </span>
                         <button onClick={() => deleteTodo(todo.id)} className="delete-btn">Delete</button>
