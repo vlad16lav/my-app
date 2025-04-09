@@ -19,7 +19,7 @@ createRoot(document.getElementById('root')).render(
                     <Route path="/home" element={<Home />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/books" element={<BooksPage />} />
-                    <Route path="/prop-types" element={<PropTypes title="PropTypes" description="This page demonstrates PropTypes usage in React." />} /> {/* Новий маршрут */}
+                    <Route path="/prop-types" element={<PropTypes />} />
                     <Route path="*" element={<NoPage />} />
                 </Route>
             </Routes>

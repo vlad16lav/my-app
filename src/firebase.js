@@ -24,49 +24,51 @@ const db = getFirestore(app);
 // Initialize Firebase Authentication
 const auth = getAuth(app);
 
-// Auth State Listener
-onAuthStateChanged(auth, user => {
-    if (user) {
-        console.log('User is signed in:', user);
-        // Користувач авторизований, ви можете виконувати запити до Firestore
-    } else {
-        console.log('No user is signed in.');
-    }
-});
+// Function to monitor user authentication state
+const onUserAuthStateChanged = (callback) => {
+    onAuthStateChanged(auth, user => {
+        callback(user);
+    });
+};
 
 // Function for user sign-up (Email/Password)
 const signUpWithEmailAndPassword = (email, password) => {
-    createUserWithEmailAndPassword(auth, email, password)
+    return createUserWithEmailAndPassword(auth, email, password)
         .then(userCredential => {
             const user = userCredential.user;
             console.log('User registered:', user);
+            return user;
         })
         .catch(error => {
             console.error('Error signing up:', error.message);
+            throw error;
         });
 };
 
 // Function for user sign-in (Email/Password)
 const signInWithEmailAndPasswordHandler = (email, password) => {
-    signInWithEmailAndPassword(auth, email, password)
+    return signInWithEmailAndPassword(auth, email, password)
         .then(userCredential => {
             const user = userCredential.user;
             console.log('User signed in:', user);
+            return user;
         })
         .catch(error => {
             console.error('Error signing in:', error.message);
+            throw error;
         });
 };
 
 // Function for user sign-out
 const signOutHandler = () => {
-    signOut(auth)
+    return signOut(auth)
         .then(() => {
             console.log('User signed out');
         })
         .catch(error => {
             console.error('Error signing out:', error.message);
+            throw error;
         });
 };
 
-export { db, signUpWithEmailAndPassword, signInWithEmailAndPasswordHandler, signOutHandler, auth };
+export { db, signUpWithEmailAndPassword, signInWithEmailAndPasswordHandler, signOutHandler, auth, onUserAuthStateChanged };

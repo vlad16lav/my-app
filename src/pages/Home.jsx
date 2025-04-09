@@ -3,10 +3,13 @@ import './Home.css';
 
 const Home = () => {
     useEffect(() => {
-        // Завантажуємо YouTube API
-        const script = document.createElement('script');
-        script.src = "https://www.youtube.com/iframe_api";
-        document.body.appendChild(script);
+        // Завантажуємо YouTube API лише один раз
+        if (!document.getElementById('youtube-api-script')) {
+            const script = document.createElement('script');
+            script.src = "https://www.youtube.com/iframe_api";
+            script.id = 'youtube-api-script';
+            document.body.appendChild(script);
+        }
 
         // Створюємо функцію для ініціалізації відео
         window.onYouTubeIframeAPIReady = () => {
@@ -21,11 +24,20 @@ const Home = () => {
                 },
             });
         };
+
+        // Очистка після демонтажу компонента
+        return () => {
+            // Можна також звільнити ресурси, якщо потрібно
+            const iframeElement = document.getElementById('youtube-video');
+            if (iframeElement) {
+                iframeElement.innerHTML = ''; // Видаляє iframe
+            }
+        };
     }, []);
 
     return (
         <div className="home-container">
-            <h1 className="flying-text">Home</h1>
+
             <div className="video-container">
                 <div id="youtube-video"></div>
             </div>
